@@ -1,6 +1,10 @@
 # Prueba Técnica
 
-Para el problema propuesto, se realizaron tres soluciones para los siguientes escenarios:
+El archivo con el resultado esta dentro de: data/resultado
+Al ejecutar los scripts en cualquiera de los tres escenarios planteados el resultado se sube de forma automatica a un s3 de aws.
+Para poder ser ejecutados los scripts se deben exportar las variables de entorno de aws.
+
+Para el problema propuesto, se realizaron tres soluciones tomando los siguientes escenarios:
 
 1. Ejecución del script en **AWS Glue**.
 2. Ejecución local.
