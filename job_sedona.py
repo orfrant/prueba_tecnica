@@ -7,15 +7,21 @@ from sedona.utils.adapter import Adapter
 from sedona.register import SedonaRegistrator
 from sedona.utils import SedonaKryoRegistrator, KryoSerializer
 from pyspark.sql import functions as f
+import os
+
+
+KEY = os.getenv('AWS_ACCESS_KEY')
+SECRET = os.getenv('AWS_SECRET_KEY')
+
 
 spark = SparkSession. \
     builder. \
     appName('appName'). \
     config("spark.serializer", KryoSerializer.getName). \
     config("spark.kryo.registrator", SedonaKryoRegistrator.getName). \
-    config("spark.hadoop.fs.s3a.access.key", "AKIAX6JQ7KD3GQZZFGIK"). \
-    config("spark.hadoop.fs.s3a.secret.key", "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"). \
     config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem"). \
+    config("spark.hadoop.fs.s3a.access.key", KEY). \
+    config("spark.hadoop.fs.s3a.secret.key", SECRET). \
     config('spark.jars.packages',
            'org.apache.sedona:sedona-spark-shaded-3.5_2.12:1.6.1,'
            'org.datasyslab:geotools-wrapper:1.6.1-28.2,'
