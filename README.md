@@ -1,6 +1,16 @@
 # Prueba Técnica
 
-El archivo con el resultado esta dentro de: **data/resultado**
+El archivo con el resultado esta dentro de: **data/resultado**:
+
++---------+------+
+|ARGOSCODE|conteo|
++---------+------+
+|  GT00772|    25|
+|  GT00773|    57|
+|  GT00769|   120|
+|  GT00771|    37|
+|  GT00770|   233|
++---------+------+
 
 Al ejecutar los scripts en cualquiera de los tres escenarios planteados el resultado se sube de forma automatica a un s3 de aws.
 
@@ -8,8 +18,8 @@ Para poder ser ejecutados los scripts se deben exportar las variables de entorno
 
 Para el problema propuesto, se realizaron tres soluciones tomando los siguientes escenarios:
 
-1. Ejecución del script en **AWS Glue**.
-2. Ejecución local.
+1. Ejecución del script en **AWS Glue**. se realizo como un notebook
+2. Ejecución local. se creo un script job_sedona.py
 3. Ejecución en un clúster dentro de un entorno de **Kubernetes**.
 
 ## Solución 1
