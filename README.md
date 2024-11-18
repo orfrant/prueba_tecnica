@@ -1,28 +1,31 @@
-# Prueba Tecnica
+# Prueba Técnica
 
-Para el problema propuesto se realizaron tres soluciones, para los siguientes tres escenarios:
+Para el problema propuesto, se realizaron tres soluciones para los siguientes escenarios:
 
-    1. Ejecucion del script en AWS Glue.
-    2. Ejecucion local.
-    3. Ejecucion en un cluster dentro de un entorno de kubernetes.
+1. Ejecución del script en **AWS Glue**.
+2. Ejecución local.
+3. Ejecución en un clúster dentro de un entorno de **Kubernetes**.
 
-**Solucion 1.** Esta solucion es la mejor si se desea utilizar AWS Glue, ya que utilizando la imagen de docker oficial de aws glue tenemos acceso nativo a los otros servicios de aws, como s3, aws glue data catalog y su despliegue en un ciclo de ci/cd. con esta solucion implementar un pipeline dentro de aws seria de la siguiente forma:
+## Solución 1
+Esta solución es la más adecuada si se desea utilizar **AWS Glue**, ya que, utilizando la imagen de Docker oficial de AWS Glue, se tiene acceso nativo a otros servicios de AWS, como **S3**, **AWS Glue Data Catalog**, y su despliegue en un ciclo de **CI/CD**. Con esta solución, implementar un pipeline dentro de AWS sería de la siguiente forma:
 
-    1. Github actions: Los pasos programados sobre el actions serian
-        * Descargar el codigo.
-        * Ejecutar pruebas dentro del contenedor oficial de aws glue.
-        * Subir el script a un S3.
-        * Actualizar el job de aws glue.
-        * Ejecutar el job (opcional), utilizando ya sea Airflow o desde el mismo script de actions.
+1. **GitHub Actions**: Los pasos programados en Actions serían:
+   - Descargar el código.
+   - Ejecutar pruebas dentro del contenedor oficial de AWS Glue.
+   - Subir el script a un **S3**.
+   - Actualizar el job de AWS Glue.
+   - Ejecutar el job (opcional), ya sea utilizando **Airflow/AWS MWAA** o desde el mismo script de Actions.
 
-    2. AWS Code Pipeline: Serian los mismos pasos pero con la ventaja que maneja de forma nativa los logs con AWS CloudWatch.
+2. **AWS CodePipeline**: Serían los mismos pasos, pero con la ventaja de que maneja de forma nativa los logs con **AWS CloudWatch**.
 
-Con esta solucion y en este contexto, todo el ciclo de ci/cd se podria hacer dentro de github actions o AWS Code Pipeline.
+Con esta solución y en este contexto, todo el ciclo de **CI/CD** se podría realizar dentro de **GitHub Actions** o **AWS CodePipeline**.
 
+---
 
-**Solucion 3.** Para esta solucion en donde utilizamos spark dentro de un cluster de kubernetes (EKS), el pipeline puede ser un poco mas complejo, pero podriamos manejar de mejor forma ambientes de prueba y produccion y podria resolverse con las siguientes tecnologias.
+## Solución 3
+Para esta solución, en la que utilizamos **Spark** dentro de un clúster de **Kubernetes (EKS)**, el pipeline puede ser un poco más complejo, pero se pueden gestionar mejor los entornos de prueba y producción. Esto se podría resolver con las siguientes tecnologías:
 
-    1. Github / AWS Codepipeline: lo usariamos para detectar la actualizacion del codigo de un job, con la diferencia que se crearia un contenedor (con las dependencias) y se subiria a algun registro, para luego ser desplegado dentro del cluster.
-    3. ECR / Docker hub: Se puede utilizar ECR como registro de contenedores o docker hub, dependiendo de las necesidades.
-    4. ArgoCd: Se utilizaria para el despliegue del contenedor dentro de nuestro cluster de forma automatica, y ademas tiene la ventaja que mantiene versiones de la infraestructura.
-    5. Ejecutar el job, bajo este contexto se puede utilizar airflow, pero tambien se podria aprovechar que se tiene control de los componentes de infraestructura y utilizar ArgoWorkflows, para levantar el cluster de spark solo mientras se ejecuta el job. 
+1. **GitHub / AWS CodePipeline**: Lo utilizaríamos para detectar la actualización del código de un job, con la diferencia de que se crearía un contenedor (con las dependencias) y se subiría a algún registro, para luego ser desplegado dentro del clúster.
+2. **ECR / Docker Hub**: Se puede utilizar **ECR** como registro de contenedores o **Docker Hub**, dependiendo de las necesidades.
+3. **ArgoCD**: Se utilizaría para el despliegue automático del contenedor dentro del clúster, además tiene la ventaja de que mantiene versiones de la infraestructura.
+4. **Ejecución del job**: En este contexto, se puede utilizar **Airflow**, pero también se podría aprovechar el control que se tiene sobre los componentes de infraestructura y utilizar **Argo Workflows** para levantar el clúster de Spark solo mientras se ejecuta el job.
