@@ -1,0 +1,52 @@
+executor: KubernetesExecutor
+
+serviceAccount:
+  create: true
+  name: airflow-service-account
+
+dags:
+  persistence:
+    enabled: true
+    existingClaim: ""
+    storageClass: "standard"
+    accessMode: ReadWriteMany
+    size: 1Gi
+
+logs:
+  persistence:
+    enabled: true
+    existingClaim: ""
+    storageClass: "standard"
+    accessMode: ReadWriteMany
+    size: 1Gi
+
+scheduler:
+  replicas: 1
+
+webserver:
+  service:
+    type: LoadBalancer
+    port: 8080
+
+postgresql:
+  enabled: true
+  postgresqlDatabase: "airflow"
+  postgresqlUsername: "airflow"
+  postgresqlPassword: "airflow"
+
+redis:
+  enabled: true
+
+airflow:
+  config:
+    AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    AIRFLOW__KUBERNETES__NAMESPACE: "airflow"
+    AIRFLOW__KUBERNETES__DAGS_IN_IMAGE: "False"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: "airflow.local"
+      paths:
+        - path: "/"
+          pathType: Prefix

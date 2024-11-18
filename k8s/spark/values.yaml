@@ -1,0 +1,43 @@
+image:
+  repository: mrroboto12/pulster-spark
+  tag: latest
+  pullPolicy: Always
+
+sparkConf:
+  spark.serializer: org.apache.spark.serializer.KryoSerializer
+  spark.kryo.registrator: org.apache.sedona.core.serde.SedonaKryoRegistrator
+  spark.hadoop.fs.s3a.endpoint: s3.amazonaws.com
+  spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+  spark.hadoop.fs.s3a.access.key: AKIAX6JQ7KD3GQZZFGIK
+  spark.hadoop.fs.s3a.secret.key: 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
+
+worker:
+  replicas: 2
+  memory: "1Gi"
+  cpu: "1"
+
+master:
+  memory: "1Gi"
+  cpu: "1"
+
+service:
+  type: LoadBalancer
+
+persistence:
+  enabled: false
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+
+
+# pysparkPythonPackages:
+#   - apache-sedona
+
+# jars:
+#   - https://repo1.maven.org/maven2/org/apache/sedona/sedona-spark-shaded-3.5_2.12/1.6.1/sedona-spark-shaded-3.5_2.12-1.6.1.jar
+#   - https://repo1.maven.org/maven2/org/apache/sedona/sedona-spark-shaded-3.4_2.12/1.6.1/sedona-spark-shaded-3.4_2.12-1.6.1.jar
+#   - https://repo.maven.apache.org/maven2/org/datasyslab/geotools-wrapper/1.6.1-28.2/geotools-wrapper-1.6.1-28.2.jar
+#   - https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar
