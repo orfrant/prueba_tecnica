@@ -2,15 +2,14 @@
 
 El archivo con el resultado esta dentro de: **data/resultado**:
 
-+---------+------+
-|ARGOSCODE|conteo|
-+---------+------+
-|  GT00772|    25|
-|  GT00773|    57|
-|  GT00769|   120|
-|  GT00771|    37|
-|  GT00770|   233|
-+---------+------+
+| ARGOSCODE | conteo |
+|-----------|--------|
+| GT00772   |     25 |
+| GT00773   |     57 |
+| GT00769   |    120 |
+| GT00771   |     37 |
+| GT00770   |    233 |
+
 
 Al ejecutar los scripts en cualquiera de los tres escenarios planteados el resultado se sube de forma automatica a un s3 de aws.
 
